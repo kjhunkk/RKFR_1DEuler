@@ -1,0 +1,34 @@
+!! Input conditions !!
+
+$$ FLUX SCHEME = Steger Warming
+
+$$ CORRECTION FUNCTION = DG
+
+$$ LIMITER = MLP-u1
+
+$$ LIMITING VARIABLE = 0
+
+$$ INITIAL = blast wave interaction
+
+$$ BOUNDARY = constant
+
+$$ TIME INTEGRATION = RK3
+
+$$ START POINT = -5.0
+
+$$ AREA = 10.0
+
+$$ GRID SIZE = 0.025
+
+$$ TARGET TIME = 0.38
+
+$$ CFL = 0.9
+
+$$ POLYNOMIAL ORDER = 2
+
+!! Options !!
+$$ Steger Warming, Van Leer
+$$ DG, SG, 2, LO, GA
+$$ none, MLP-u1, MLP-u2
+$$ smooth, shock tube, supersonic expansion, blast wave, two strong shock, contact discontinuity, blast wave interaction, shu osher
+$$ periodic, constant
