@@ -38,6 +38,9 @@ protected:
 	// MLP-based troubled-cell marker(Augmented MLP condition) / p.m. Zone(object), cell number
 	bool augmentMLPmarker(std::shared_ptr<Zone>, int_t) const;
 
+	// MLP-based troubled-cell marker(P1 MLP condition) / p.m. Zone(object), cell number
+	bool P1MLPmarker(std::shared_ptr<Zone>, int_t) const;
+
 	// hierarchical troubled-cell marker(Smooth extrema detector) / p.m. Zone(object), cell number
 	bool extremaDetector(std::shared_ptr<Zone>, int_t) const;
 

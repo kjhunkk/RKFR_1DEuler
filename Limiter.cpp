@@ -75,7 +75,8 @@ void Limiter::troubleCellProject
 
 bool Limiter::troubleCellMarker(std::shared_ptr<Zone> zone, int_t degree, int_t icell) const
 {
-	bool marker = augmentMLPmarker(zone, icell);
+	//bool marker = augmentMLPmarker(zone, icell);
+	bool marker = P1MLPmarker(zone, icell);
 	if ((marker == false) && (degree > 1)) marker = extremaDetector(zone, icell);
 	
 	return marker;
@@ -116,6 +117,43 @@ bool Limiter::augmentMLPmarker(std::shared_ptr<Zone> zone, int_t icell) const
 	max_avgQ = std::max(getAverage(zone, icell), getAverage(zone, icell + 1));
 	min_avgQ = std::min(getAverage(zone, icell), getAverage(zone, icell + 1));
 	if (!((max_avgQ - max_appQ > -epsilon) && (min_appQ - min_avgQ > -epsilon)))
+		marker = false;
+
+	return marker;
+}
+
+bool Limiter::P1MLPmarker(std::shared_ptr<Zone> zone, int_t icell) const
+{
+	// P1 MLP condition marker
+	bool marker = true;
+
+	// Temporary DOF
+	std::vector<std::vector<real_t> > temp_DOF = zone->getDOF();
+
+	// Variables
+	real_t coord_x_left = zone->getGrid()->getCell()[icell]->getPosX() - 0.5*_size_cell;
+	real_t coord_x_right = zone->getGrid()->getCell()[icell]->getPosX() + 0.5*_size_cell;
+
+	// Variables to MLP condition
+	real_t max_avgQ; /// maximum averaged Q
+	real_t min_avgQ; /// minimum averaged Q
+	real_t P1_projQ; /// P1 projected Q
+	real_t appQ; /// approximated vertex Q
+
+	// Left cell MLP condition
+	appQ = zone->getPolySolution(icell, coord_x_left);
+	P1_projQ = projectionTo(1, zone, icell, coord_x_left);
+	max_avgQ = std::max(getAverage(zone, icell - 1), getAverage(zone, icell));
+	min_avgQ = std::min(getAverage(zone, icell - 1), getAverage(zone, icell));
+	if (!((max_avgQ - P1_projQ > -epsilon) && (P1_projQ - min_avgQ > -epsilon)))
+		marker = false;
+
+	// Right cell MLP condition
+	appQ = zone->getPolySolution(icell, coord_x_right);
+	P1_projQ = projectionTo(1, zone, icell, coord_x_right);
+	max_avgQ = std::max(getAverage(zone, icell), getAverage(zone, icell + 1));
+	min_avgQ = std::min(getAverage(zone, icell), getAverage(zone, icell + 1));
+	if (!((max_avgQ - P1_projQ > -epsilon) && (P1_projQ - min_avgQ > -epsilon)))
 		marker = false;
 
 	return marker;
