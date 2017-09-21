@@ -32,7 +32,7 @@ void Limiter::hMLP_Limiter(std::vector<std::shared_ptr<Zone>> zone)
 		// Marking troubled-cell
 		for (int_t icell = GHOST; icell < _num_cell - GHOST; ++icell)
 		{
-			marker[icell] = troubleCellMarker(zone[0], projectDegree[icell], icell);
+			marker[icell] = troubleCellMarker(zone[_limitVar], projectDegree[icell], icell);
 		}
 
 		// Project troubled-cell

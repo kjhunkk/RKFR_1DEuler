@@ -9,6 +9,7 @@
 #include "TimeIntegEuler.h"
 #include "TimeIntegRK.h"
 #include "ConvFluxSW.h"
+#include "ConvFluxRoe.h"
 
 // Modified 2017-09-01
 // by Juhyeon Kim
@@ -50,6 +51,7 @@ int main()
 	// Initialzing computational flux
 	std::shared_ptr<ConvFlux> convFlux;
 	if (reader->getFluxScheme().compare("StegerWarming") == 0) convFlux = std::make_shared<ConvFluxSW>(conserv[0]->getPolyOrder(), reader->getCorrectFunc());
+	else if (reader->getFluxScheme().compare("Roe") == 0) convFlux = std::make_shared<ConvFluxRoe>(conserv[0]->getPolyOrder(), reader->getCorrectFunc());
 	else ERROR("cannot find computational flux");
 	
 	// Initialzing time integrator

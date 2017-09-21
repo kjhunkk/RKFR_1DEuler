@@ -66,7 +66,6 @@ void Zone::initialize(std::shared_ptr<InitialCondition> initialCondition)
 
 	// Grid size
 	real_t temp_dx = _grid->getSizeX();
-	real_t tiny;
 
 	// Initializing Degree of freedom
 	for (int_t icell = 0; icell < _grid->getNumCell(); ++icell)

@@ -4,7 +4,7 @@ Grid::Grid(real_t start, real_t area, real_t sizeX)
 {
 	_area = area;
 	_sizeX = sizeX;
-	_num_cell = area / sizeX + epsilon;
+	_num_cell = int(area / sizeX + epsilon);
 	_num_cell += 2 * GHOST;
 	_cell.resize(_num_cell);
 	real_t coord_X = 0.0;

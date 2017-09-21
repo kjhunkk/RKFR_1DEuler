@@ -168,5 +168,8 @@ real_t InitialCondition::Shu_Osher(real_t x, int_t solType) const
 	case 2:
 		if (x < -4.0) return 39.16666843;
 		else return 2.5;
+	default:
+		ERROR("solution type number");
+		return 0.0;
 	}
 }

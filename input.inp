@@ -1,14 +1,14 @@
 !! Input conditions !!
 
-$$ FLUX SCHEME = Steger Warming
+$$ FLUX SCHEME = Roe
 
-$$ CORRECTION FUNCTION = DG
+$$ CORRECTION FUNCTION = 2
 
 $$ LIMITER = MLP-u1
 
 $$ LIMITING VARIABLE = 0
 
-$$ INITIAL = blast wave interaction
+$$ INITIAL = shu osher
 
 $$ BOUNDARY = constant
 
@@ -20,14 +20,14 @@ $$ AREA = 10.0
 
 $$ GRID SIZE = 0.025
 
-$$ TARGET TIME = 0.38
+$$ TARGET TIME = 1.8
 
 $$ CFL = 0.9
 
 $$ POLYNOMIAL ORDER = 2
 
 !! Options !!
-$$ Steger Warming, Van Leer
+$$ Steger Warming, Roe
 $$ DG, SG, 2, LO, GA
 $$ none, MLP-u1, MLP-u2
 $$ smooth, shock tube, supersonic expansion, blast wave, two strong shock, contact discontinuity, blast wave interaction, shu osher
